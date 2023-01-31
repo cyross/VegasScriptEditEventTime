@@ -1,5 +1,4 @@
 ﻿using ScriptPortal.Vegas;
-using System;
 using System.Windows.Forms;
 using VegasScriptHelper;
 
@@ -9,7 +8,6 @@ namespace VegasScriptEditEventTime
     {
         public void FromVegas(Vegas vegas)
         {
-            VegasScriptSettings.Load();
             VegasHelper helper = VegasHelper.Instance(vegas);
 
             try

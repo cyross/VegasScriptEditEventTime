@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VegasScriptEditEventTime</RootNamespace>
-    <AssemblyName>VegasScriptEditEventTime</AssemblyName>
+    <AssemblyName>イベントの開始時間と長さを編集</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

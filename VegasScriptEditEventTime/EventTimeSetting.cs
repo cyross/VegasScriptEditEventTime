@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
+using VegasScriptHelper;
 
 namespace VegasScriptEditEventTime
 {
@@ -22,11 +23,6 @@ namespace VegasScriptEditEventTime
             set { SetTimeLengthNanos(value); }
         }
 
-        private long RoundNanos(long nanos)
-        {
-            return (nanos + 5000) / 10000;
-        }
-
         private void SetStartTimeNanos(long nanos)
         {
             SetNanos(nanos, startTimeHour, startTimeMinute, startTimeSecond, startTimeMilliSecond);
@@ -39,14 +35,11 @@ namespace VegasScriptEditEventTime
 
         private void SetNanos(long nanos, TextBox hBox, TextBox mBox, TextBox sBox, TextBox msBox)
         {
-            long roundNanos = RoundNanos(nanos);
-            msBox.Text = (roundNanos % 1000).ToString();
-            roundNanos = roundNanos / 1000;
-            sBox.Text = (roundNanos % 60).ToString();
-            roundNanos = roundNanos / 60;
-            mBox.Text = (roundNanos % 60).ToString();
-            roundNanos = roundNanos / 60;
-            hBox.Text = roundNanos.ToString();
+            VegasTime time = new VegasTime(nanos);
+            hBox.Text = time.Hour.ToString();
+            mBox.Text = time.Minute.ToString();
+            sBox.Text = time.Second.ToString();
+            msBox.Text = time.MilliSecond.ToString();
         }
 
         private long GetStartTimeNanos()
@@ -61,12 +54,14 @@ namespace VegasScriptEditEventTime
 
         private long GetNanos(TextBox hBox, TextBox mBox, TextBox sBox, TextBox msBox)
         {
-            long nanos = long.Parse(hBox.Text) * 60;
-            nanos = (nanos + long.Parse(mBox.Text)) * 60;
-            nanos = (nanos + long.Parse(sBox.Text)) * 1000;
-            return (nanos + long.Parse(msBox.Text)) * 10000;
+            VegasTime time = new VegasTime(
+                long.Parse(hBox.Text),
+                long.Parse(mBox.Text),
+                long.Parse(sBox.Text),
+                long.Parse(msBox.Text)
+                );
+            return time.Nanos;
         }
-
 
         private void ValidateNumberOnly(object sender, CancelEventArgs e)
         {
