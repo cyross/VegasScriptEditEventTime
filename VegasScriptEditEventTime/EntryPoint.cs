@@ -15,7 +15,7 @@ namespace VegasScriptEditEventTime
                 TrackEvent trackEvent = helper.GetSelectedEvent();
                 VegasDuration duration = helper.GetEventTime(trackEvent);
 
-                EventTimeSetting dialog = new EventTimeSetting()
+                SettingDialog dialog = new SettingDialog()
                 {
                     StartTime = duration.StartTime.Nanos,
                     TimeLength = duration.Length.Nanos

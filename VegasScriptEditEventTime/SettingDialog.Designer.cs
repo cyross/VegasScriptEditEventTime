@@ -1,6 +1,6 @@
 ﻿namespace VegasScriptEditEventTime
 {
-    partial class EventTimeSetting
+    partial class SettingDialog
     {
         /// <summary>
         /// Required designer variable.

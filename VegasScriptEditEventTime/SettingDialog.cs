@@ -4,9 +4,9 @@ using VegasScriptHelper;
 
 namespace VegasScriptEditEventTime
 {
-    public partial class EventTimeSetting : Form
+    public partial class SettingDialog : Form
     {
-        public EventTimeSetting()
+        public SettingDialog()
         {
             InitializeComponent();
         }
