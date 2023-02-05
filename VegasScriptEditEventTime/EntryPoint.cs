@@ -6,6 +6,8 @@ namespace VegasScriptEditEventTime
 {
     public class EntryPoint: IEntryPoint
     {
+        private static SettingDialog settingDialog = null;
+
         public void FromVegas(Vegas vegas)
         {
             VegasHelper helper = VegasHelper.Instance(vegas);
@@ -15,15 +17,15 @@ namespace VegasScriptEditEventTime
                 TrackEvent trackEvent = helper.GetSelectedEvent();
                 VegasDuration duration = helper.GetEventTime(trackEvent);
 
-                SettingDialog dialog = new SettingDialog()
+                if(settingDialog == null) { settingDialog = new SettingDialog(); }
+
+                settingDialog.StartTime = duration.StartTime.Nanos;
+                settingDialog.TimeLength = duration.Length.Nanos;
+
+                if(settingDialog.ShowDialog() == DialogResult.OK)
                 {
-                    StartTime = duration.StartTime.Nanos,
-                    TimeLength = duration.Length.Nanos
-                };
-                if(dialog.ShowDialog() == DialogResult.OK)
-                {
-                    duration.StartTime.Nanos = dialog.StartTime;
-                    duration.Length.Nanos = dialog.TimeLength;
+                    duration.StartTime.Nanos = settingDialog.StartTime;
+                    duration.Length.Nanos = settingDialog.TimeLength;
                     helper.SetEventTime(trackEvent, duration);
                 }
             }

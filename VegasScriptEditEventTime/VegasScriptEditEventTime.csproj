@@ -51,17 +51,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntryPoint.cs" />
-    <Compile Include="EventTimeSetting.cs">
+    <Compile Include="SettingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EventTimeSetting.Designer.cs">
-      <DependentUpon>EventTimeSetting.cs</DependentUpon>
+    <Compile Include="SettingDialog.Designer.cs">
+      <DependentUpon>SettingDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EventTimeSetting.resx">
-      <DependentUpon>EventTimeSetting.cs</DependentUpon>
+    <EmbeddedResource Include="SettingDialog.resx">
+      <DependentUpon>SettingDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
