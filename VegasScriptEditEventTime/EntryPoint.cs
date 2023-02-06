@@ -1,4 +1,6 @@
 ﻿using ScriptPortal.Vegas;
+using System.Diagnostics;
+using System;
 using System.Windows.Forms;
 using VegasScriptHelper;
 
@@ -26,7 +28,11 @@ namespace VegasScriptEditEventTime
                 {
                     duration.StartTime.Nanos = settingDialog.StartTime;
                     duration.Length.Nanos = settingDialog.TimeLength;
-                    helper.SetEventTime(trackEvent, duration);
+
+                    using (new UndoBlock("イベントの開始時間・長さを編集"))
+                    {
+                        helper.SetEventTime(trackEvent, duration);
+                    }
                 }
             }
             catch (VegasHelperTrackUnselectedException)
@@ -41,7 +47,19 @@ namespace VegasScriptEditEventTime
             {
                 MessageBox.Show("イベントを選択していません。");
             }
-
+            catch (Exception ex)
+            {
+                string errMessage = "[MESSAGE]" + ex.Message + "\n[SOURCE]" + ex.Source + "\n[STACKTRACE]" + ex.StackTrace;
+                Debug.WriteLine("---[Exception In Helper]---");
+                Debug.WriteLine(errMessage);
+                Debug.WriteLine("---------------------------");
+                MessageBox.Show(
+                    errMessage,
+                    "エラー",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                throw ex;
+            }
         }
     }
 }
